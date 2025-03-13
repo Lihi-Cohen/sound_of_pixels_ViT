@@ -2,4 +2,4 @@ To run the project, clone it to your workspace using: "!git clone https://github
 
 Open the terminal and run: %cd sound_of_pixels_ViT
 
-Run the file: main.pynb
+Run the file: main.ipynb
