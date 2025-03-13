@@ -5,11 +5,15 @@ import random
 
 print("Current Working Directory:", os.getcwd())
 
-# Define input JSON files
+# Get the directory where the script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))  # Works when running as a script
+# script_dir = os.getcwd()  # Use this in Google Colab or Jupyter Notebook
+
+# Define relative paths
 json_files = [
-    "/content/pixels/MUSIC_dataset/MUSIC21_solo_videos.json",
-    "/content/pixels/MUSIC_dataset/MUSIC_duet_videos.json",
-    "/content/pixels/MUSIC_dataset/MUSIC_solo_videos.json"
+    os.path.join(script_dir, "MUSIC_dataset", "MUSIC21_solo_videos.json"),
+    os.path.join(script_dir, "MUSIC_dataset", "MUSIC_duet_videos.json"),
+    os.path.join(script_dir, "MUSIC_dataset", "MUSIC_solo_videos.json"),
 ]
 
 # Define output directory
@@ -84,11 +88,14 @@ def download_videos(json_file, folder_name):
             except subprocess.CalledProcessError as e:
                 print(f"Error downloading {video_id} - {url}: {e}")
 
-# Map JSON file names to folder names
+# Get the script's directory (for scripts)
+script_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in locals() else os.getcwd()
+
+# Create a dynamic mapping using relative paths
 json_folder_map = {
-    "/content/pixels/MUSIC_dataset/MUSIC21_solo_videos.json": "MUSIC21_solo",
-    "/content/pixels/MUSIC_dataset/MUSIC_duet_videos.json": "MUSIC_duet",
-    "/content/pixels/MUSIC_dataset/MUSIC_solo_videos.json": "MUSIC_solo"
+    os.path.join(script_dir, "MUSIC_dataset", "MUSIC21_solo_videos.json"): "MUSIC21_solo",
+    os.path.join(script_dir, "MUSIC_dataset", "MUSIC_duet_videos.json"): "MUSIC_duet",
+    os.path.join(script_dir, "MUSIC_dataset", "MUSIC_solo_videos.json"): "MUSIC_solo",
 }
 
 # Download videos and audio for each JSON file
